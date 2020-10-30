@@ -6,7 +6,27 @@
     <title>TO DO LIST</title>
 </head>
 <body>
-    <h1>It's a <%= DAY %>     </h1>
+
+    <h1> <%= DAY %> </h1>
     
+    <ul>
+        <li> ABC </li>
+
+        <% for (var i = 0; i < LIST_ITEMS.length; i++) { %>
+
+            <li> <%= LIST_ITEMS[i] %> </li>
+
+        <% } %>
+        
+    </ul>
+
+    <form action="/" method="POST">
+
+        <input type="text" name="newItem">
+        
+        <button type="submit" name="button">Add</button>
+    
+    
+    </form>
 </body>
 </html>
