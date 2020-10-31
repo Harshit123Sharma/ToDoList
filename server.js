@@ -1,6 +1,8 @@
 //jshint esversion:6
 
-var items = [];
+let items = [];
+let workItems = [];
+
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -9,13 +11,14 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
 
-    var today = new Date();
-    //var currentDay = today.getDay();
-    var options = {
+    let today = new Date();
+    //let currentDay = today.getDay();
+    let options = {
 
         weekday : "long",
         year : "numeric",
@@ -23,8 +26,8 @@ app.get("/", function(req, res) {
         day : "numeric"
 
     };
-    var day = today.toLocaleDateString("en-US", options); 
-    console.log(day);
+    let day = today.toLocaleDateString("en-US", options); 
+    //console.log(day);
     /*switch (currentDay) {
         case 0 : 
             day = "Sunday";
@@ -58,17 +61,44 @@ app.get("/", function(req, res) {
         LIST_ITEMS : items
     
     });
-
  
 });
 
 app.post("/", function(req, res) {
 
-    var item = req.body.newItem;
-    items.push(item);
-    res.redirect("/");
-    //console.log(item); 
+    let item = req.body.newItem;
+    
+    if (req.body.list === "Work") {
 
+        workItems.push(item);
+        res.redirect("/work");
+
+    }
+    else {
+
+        items.push(item);
+        res.redirect("/");
+
+    }
+
+});
+
+app.get("/work", function(req, res) {
+
+    res.render("list", {
+
+        DAY : "Work List",
+        LIST_ITEMS : workItems
+
+    })
+
+});
+
+app.post("/work", function(req, res) {
+
+    let item = req.body.newItem;
+    workItems.push(item)
+    res.redirect("/work");
 
 });
 
