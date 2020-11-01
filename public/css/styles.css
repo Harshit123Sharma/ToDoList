@@ -2,7 +2,8 @@ html {
   background-color: #f1f1e8;
   background-image: -webkit-linear-gradient(59.3deg, #206A5D 50%, #81B214 50%);
   min-height: 1000px;
-  font-family: 'helvetica neue';
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
 }
 
 h1 {
